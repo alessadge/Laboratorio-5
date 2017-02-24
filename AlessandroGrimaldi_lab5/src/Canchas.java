@@ -55,14 +55,7 @@ public class Canchas extends Lugares{
         this.seguridad = seguridad;
     }
 
-    public ArrayList<Carreteras> getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(ArrayList<Carreteras> entrada) {
-        this.entrada = entrada;
-    }
-
+   
     public Carreteras getSalida() {
         return salida;
     }
