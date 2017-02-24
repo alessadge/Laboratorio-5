@@ -115,6 +115,11 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(ta_casaDireccion);
 
         jButton4.setText("Agregar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_casaLayout = new javax.swing.GroupLayout(jd_casa.getContentPane());
         jd_casa.getContentPane().setLayout(jd_casaLayout);
@@ -195,6 +200,11 @@ public class Principal extends javax.swing.JFrame {
         cb_restauranteCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "chino", "mexicano", "italiano", "comida rápida" }));
 
         jButton6.setText("Agregar");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_restauranteLayout = new javax.swing.GroupLayout(jd_restaurante.getContentPane());
         jd_restaurante.getContentPane().setLayout(jd_restauranteLayout);
@@ -654,6 +664,36 @@ public class Principal extends javax.swing.JFrame {
         cb_canchaCategoria.setSelectedIndex(0);
         
     }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        String nombre, direccion, categoria;
+        int seguridad,calificacion ;
+        calificacion = Integer.parseInt(cb_restauranteCalificacion.getItemAt(cb_restauranteCalificacion.getSelectedIndex()));
+        nombre = this.tf_restauranteNombre.getText();
+        direccion = this.ta_restauranteDireccion.getText();
+        categoria=this.cb_restauranteCategoria.getItemAt(cb_restauranteCategoria.getSelectedIndex());
+        seguridad=Integer.parseInt(this.tf_restauranteSeguridad.getText());
+        restaurantes.add(new Restaurantes(categoria, calificacion, nombre, direccion, seguridad));
+        tf_restauranteNombre.setText("");
+        ta_restauranteDireccion.setText("");
+        tf_restauranteSeguridad.setText("");
+        cb_restauranteCategoria.setSelectedIndex(0);
+        cb_restauranteCalificacion.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        String nombre, direccion;
+        int seguridad;
+        nombre = this.tf_casaNombre.getText();
+        direccion = this.ta_casaDireccion.getText();
+        seguridad=Integer.parseInt(this.tf_casaSeguridad.getText());
+        casas.add(new Casa(nombre, direccion, seguridad));
+        tf_casaNombre.setText("");
+        ta_casaDireccion.setText("");
+        tf_casaSeguridad.setText("");
+
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
