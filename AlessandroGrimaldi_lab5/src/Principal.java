@@ -5,6 +5,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -74,7 +75,9 @@ public class Principal extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         MenuClickDerecho = new javax.swing.JPopupMenu();
-        eliminar = new javax.swing.JMenuItem();
+        eliminarRest = new javax.swing.JMenuItem();
+        EliminarCarr = new javax.swing.JMenuItem();
+        EliminarCanch = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         tab_creacion = new javax.swing.JTabbedPane();
@@ -380,13 +383,29 @@ public class Principal extends javax.swing.JFrame {
 
         MenuClickDerecho.setToolTipText("Desea eliminar?");
 
-        eliminar.setText("Desea Eliminar esta fila seleccionada?");
-        eliminar.addActionListener(new java.awt.event.ActionListener() {
+        eliminarRest.setText("Desea Eliminar este restaurante seleccionada?");
+        eliminarRest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarActionPerformed(evt);
+                eliminarRestActionPerformed(evt);
             }
         });
-        MenuClickDerecho.add(eliminar);
+        MenuClickDerecho.add(eliminarRest);
+
+        EliminarCarr.setText("Desea Eliminar esta Carretera seleccionada");
+        EliminarCarr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCarrActionPerformed(evt);
+            }
+        });
+        MenuClickDerecho.add(EliminarCarr);
+
+        EliminarCanch.setText("Desea Eliminar esta Cancha seleccionada");
+        EliminarCanch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCanchActionPerformed(evt);
+            }
+        });
+        MenuClickDerecho.add(EliminarCanch);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -654,9 +673,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel19)
                             .addComponent(jLabel20))
@@ -665,7 +684,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(cb_lista, 0, 124, Short.MAX_VALUE)
                             .addComponent(distancia)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
+                        .addGap(121, 121, 121)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -688,9 +707,9 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cb_lista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel20))
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(50, 50, 50))))
         );
 
         jTabbedPane3.addTab("Listar JList", jPanel7);
@@ -798,6 +817,20 @@ public class Principal extends javax.swing.JFrame {
         seguridad=Integer.parseInt(this.tf_canchaSeguridad.getText());
         canchas.add(new Canchas(categoria,estado,nombre,direccion,seguridad));
         lugares.add(new Canchas(categoria,estado,nombre,direccion,seguridad));
+        DefaultTreeModel m = (DefaultTreeModel) tree.getModel();
+                DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+                DefaultMutableTreeNode tipo_categoria;
+                tipo_categoria = new DefaultMutableTreeNode("canchas");
+                DefaultMutableTreeNode nodo;
+                nodo = new 
+        DefaultMutableTreeNode(cb_canchaCategoria.getSelectedItem().toString());
+                DefaultMutableTreeNode nombre_can;
+                nombre_can = new DefaultMutableTreeNode(tf_canchaNombre.getText());
+                nodo.add(nombre_can);
+                tipo_categoria.add(nodo);
+                raiz.add
+                (tipo_categoria);
+                m.reload();
         tf_canchaNombre.setText("");
         tf_canchaEstado.setText("");
         ta_canchaDireccion.setText("");
@@ -816,6 +849,21 @@ public class Principal extends javax.swing.JFrame {
         categoria=this.cb_restauranteCategoria.getItemAt(cb_restauranteCategoria.getSelectedIndex());
         seguridad=Integer.parseInt(this.tf_restauranteSeguridad.getText());
         restaurantes.add(new Restaurantes(categoria, calificacion, nombre, direccion, seguridad));
+        lugares.add(new Restaurantes(categoria, calificacion, nombre, direccion, seguridad));
+        DefaultTreeModel m = (DefaultTreeModel) tree.getModel();
+                DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+                DefaultMutableTreeNode tipo_categoria;
+                tipo_categoria = new DefaultMutableTreeNode("restaurantes");
+                DefaultMutableTreeNode nodo;
+                nodo = new 
+        DefaultMutableTreeNode(cb_restauranteCategoria.getSelectedItem().toString());
+                DefaultMutableTreeNode nombre_can;
+                nombre_can = new DefaultMutableTreeNode(tf_restauranteNombre.getText());
+                nodo.add(nombre_can);
+                tipo_categoria.add(nodo);
+                raiz.add
+                (tipo_categoria);
+                m.reload();
         tf_restauranteNombre.setText("");
         ta_restauranteDireccion.setText("");
         tf_restauranteSeguridad.setText("");
@@ -914,12 +962,11 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_TablaMouseClicked
 
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+    private void eliminarRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarRestActionPerformed
         // TODO add your handling code here:
         restaurantes.remove(Tabla.getSelectedRow());
-        carreteras.remove(Tabla.getSelectedRow());
-        canchas.remove(Tabla.getSelectedRow());
-    }//GEN-LAST:event_eliminarActionPerformed
+        
+    }//GEN-LAST:event_eliminarRestActionPerformed
 
     private void tab_creacionStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tab_creacionStateChanged
         // TODO add your handling code here:
@@ -947,15 +994,26 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         int dis = Integer.parseInt(distancia.getText());
-        if(cb_lista.getItemAt(cb_lista.getSelectedIndex()) == "Restaurante"){
+        if(cb_lista.getItemAt(cb_lista.getSelectedIndex()).equalsIgnoreCase("Rrestaurante")){
             for (Lugares t : restaurantes) {
                 
             }
-        }else{
+        }else if(cb_lista.getItemAt(cb_lista.getSelectedIndex()).equalsIgnoreCase("cancha")){
             
             
         }
     }//GEN-LAST:event_jButton9MouseClicked
+
+    private void EliminarCarrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCarrActionPerformed
+        // TODO add your handling code here:
+        carreteras.remove(Tabla.getSelectedRow());
+        
+    }//GEN-LAST:event_EliminarCarrActionPerformed
+
+    private void EliminarCanchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCanchActionPerformed
+        // TODO add your handling code here:
+        canchas.remove(Tabla.getSelectedRow());
+    }//GEN-LAST:event_EliminarCanchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -993,6 +1051,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem EliminarCanch;
+    private javax.swing.JMenuItem EliminarCarr;
     private javax.swing.JPopupMenu MenuClickDerecho;
     private javax.swing.JTable Tabla;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1003,7 +1063,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_restauranteCalificacion;
     private javax.swing.JComboBox<String> cb_restauranteCategoria;
     private javax.swing.JTextField distancia;
-    private javax.swing.JMenuItem eliminar;
+    private javax.swing.JMenuItem eliminarRest;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1083,5 +1143,20 @@ Lugares persona_seleccionada;
                 (DefaultListModel) list.getModel();
         modelo.addElement(new Casa(nombre, direccion, seguridad));
         list.setModel(modelo);
+
+DefaultTreeModel m = (DefaultTreeModel) J_tree.getModel();
+                DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+                DefaultMutableTreeNode tipo_categoria;
+                tipo_categoria = new DefaultMutableTreeNode("restaurantes");
+                DefaultMutableTreeNode nodo;
+                nodo = new 
+DefaultMutableTreeNode(Categoria_Restaurante.getSelectedItem().toString());
+                DefaultMutableTreeNode nombre_can;
+                nombre_can = new DefaultMutableTreeNode(Nombre_Restaurante.getText());
+                nodo.add(nombre_can);
+                tipo_categoria.add(nodo);
+                raiz.add
+(tipo_categoria);
+                m.reload();
 */
 }
