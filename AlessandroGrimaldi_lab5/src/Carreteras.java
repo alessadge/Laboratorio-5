@@ -58,7 +58,7 @@ public class Carreteras {
 
     @Override
     public String toString() {
-        return "Carreteras{" + "numero=" + numero + ", distancia=" + distancia + ", inicio=" + inicio + ", finaliza=" + finaliza + '}';
+        return ""+distancia;
     }
     
 }
